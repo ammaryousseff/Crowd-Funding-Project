@@ -1,33 +1,36 @@
-# 🚀 Crowd-Funding Console App
+# Crowd-Funding Console App
 
-A Python-based command-line application that allows users to register, login, and manage fundraising campaigns. This project demonstrates the use of **File Handling (JSON)**, **Modular Programming**, **Authentication Logic**, and **Input Validation**.
+A Python-based command-line application that allows users to register, login, and manage fundraising campaigns. This project demonstrates the use of **File Handling (JSON)**, **Modular Architecture**, **Tabular Data Views**, and **Advanced Search Logic**.
 
-## ✨ Features
+## Features
 
-### 🔐 Authentication System
-* **Register:** Users can create an account with strict validations:
-    * **First/Last Name:** Must be letters only (no numbers).
-    * **Email:** Validated using Regex; checks for duplicates to prevent double registration.
-    * **Password:** Secure hidden input (shows `****`) with confirmation check.
-    * **Mobile Phone:** Must be a valid Egyptian number (starts with 010, 011, 012, 015).
-* **Login:** Secure login system that grants access to the project dashboard.
+### Authentication System
+* **Register:** Secure account creation with strict validations:
+    * **Names:** Letters only.
+    * **Email:** Regex validation & duplicate checking.
+    * **Password:** Hidden input (`****`) with confirmation.
+    * **Phone:** Egyptian number validation (010, 011, 012, 015).
+* **Login:** Secure session management.
 
-### 📂 Project Management
-* **Create Project:** Users can start a campaign with Title, Details, Target, and Dates.
-    * *Smart Date Logic:* Automatically checks that the End Date is after the Start Date.
-* **View Projects:** Lists all campaigns from all users.
-* **Search Projects:** Find campaigns that start on a specific date.
-* **Edit Projects:** Users can edit **only their own** projects.
-    * Includes a sub-menu to select specific fields (Title, Details, Target, Dates) to update.
-* **Delete Projects:** Users can delete **only their own** projects.
+### Project Management
+* **Create Project:** Add campaigns with Title, Details, Target, and Date Range.
+    * *Smart Validation:* Ensures End Date is logically after Start Date.
+* **View Projects (Table View):** Displays all campaigns in a professional **Grid Table** using `tabulate`.
+* **Edit/Delete:** Users can only modify or remove their *own* projects.
 
-### 💾 Data Persistence
-* All data is stored in structured **JSON files** (`users.json` & `projects.json`).
-* Data remains saved even after the program is closed.
+### Advanced Search System
+* **Flexible Criteria:** Users can search by **Start Date** or **End Date**.
+* **Smart Date Matching:** Supports two modes:
+    * **Exact Date:** `2025-01-01`
+    * **Year Only:** `2025` (Finds all projects in that year).
+
+### Data Persistence
+* Data is stored in structured **JSON files** (`users.json`, `projects.json`).
+* Changes are saved automatically.
 
 ---
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 1.  **Clone the repository:**
     ```bash
@@ -36,9 +39,9 @@ A Python-based command-line application that allows users to register, login, an
     ```
 
 2.  **Install Dependencies:**
-    This project uses `pwinput` to mask passwords.
+    This project uses `pwinput` for passwords and `tabulate` for tables.
     ```bash
-    pip install pwinput
+    pip install pwinput tabulate
     ```
 
 3.  **Run the Application:**
@@ -48,33 +51,29 @@ A Python-based command-line application that allows users to register, login, an
 
 ---
 
-## 📂 File Structure
-
-This project follows a modular architecture to keep code clean and organized:
+## File Structure
 
 ```text
 Crowd Funding/
 │
-├── main.py                  # 🏁 Entry Point: The main loop (Login/Register Menu)
-├── projects_menu.py         # 🎮 Dashboard: The menu for logged-in users
+├── main.py                  # Entry Point: Main Login/Register Menu
+├── projects_menu.py         # Dashboard: Menu for logged-in users
 │
 ├── 🔐 Authentication
-│   ├── register.py          # Logic for creating new accounts
-│   ├── login.py             # Logic for user authentication
+│   ├── register.py          # Account creation logic
+│   ├── login.py             # Authentication logic
 │
 ├── 🚀 Features
-│   ├── create_project.py    # Logic to add a new campaign
-│   ├── view_projects.py     # Logic to list all campaigns
-│   ├── edit_project.py      # Logic to update existing campaigns
-│   ├── delete_project.py    # Logic to remove a campaign
-│   └── search_project.py    # Logic to search campaigns by date
+│   ├── create_project.py    # Add new campaign
+│   ├── view_projects.py     # List all campaigns (Table view)
+│   ├── edit_project.py      # Edit own campaigns
+│   ├── delete_project.py    # Delete own campaigns
+│   └── search_project.py    # Search by Start/End Date or Year
 │
-├── 🛠️ Helpers & Utils
-│   ├── read_write_json.py   # Shared functions to Load/Save JSON data
-│   └── validate_date.py     # Shared function to validate date formats
+├── 🛠️ Utilities
+│   ├── read_write_json.py   # Shared JSON Load/Save functions
+│   └── validate_date.py     # Shared Date validation
 │
-├── 💾 Database
-│   ├── users.json           # Stores registered user data
-│   └── projects.json        # Stores project campaign data
-│
-└── .gitignore               # Specifies files to be ignored by Git
+└── 💾 Database
+    ├── users.json           # User data
+    └── projects.json        # Project data
